@@ -44,8 +44,10 @@ Plug 'jelera/vim-javascript-syntax'
 ~~~
 pip3 install --user pynvim
 ~~~
-###Completitons
+### Completitons
 [Coc](https://github.com/neoclide/coc.nvim)
 [Tabnine](https://github.com/neoclide/coc-tabnine)
 
+### Themes
+[Onehalf](https://github.com/sonph/onehalf/tree/master/vim)
 
