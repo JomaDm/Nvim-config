@@ -36,7 +36,16 @@ let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
 ~~~
 ### Javascript
+~~~
 Plug 'jelera/vim-javascript-syntax'
+~~~
 
-# Activar la interfaz de Python3
+### Activar la interfaz de Python3
+~~~
 pip3 install --user pynvim
+~~~
+###Completitons
+[Coc](https://github.com/neoclide/coc.nvim)
+[Tabnine](https://github.com/neoclide/coc-tabnine)
+
+
