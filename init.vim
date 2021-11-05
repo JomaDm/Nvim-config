@@ -49,24 +49,21 @@ Plug 'dense-analysis/ale'
 Plug 'Yggdroot/indentLine'
 Plug 'editor-bootstrap/vim-bootstrap-updater'
 Plug 'tpope/vim-rhubarb' " required by fugitive to :Gbrowse
-Plug 'tomasr/molokai'
 Plug 'pangloss/vim-javascript'
 Plug 'mattn/emmet-vim'
 
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
-let g:deoplete#enable_at_startup = 1
+Plug 'sonph/onehalf', { 'rtp': 'vim' }
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'dense-analysis/ale'
 
-if has('win32') || has('win64')
-  Plug 'tbodt/deoplete-tabnine', { 'do': 'powershell.exe .\install.ps1' }
-else
-  Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
-endif
+" post install (yarn install | npm install) then load plugin only for editing supported files
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+let g:prettier#autoformat = 1
+let g:prettier#autoformat_require_pragma = 0
+
+Plug 'ryanoasis/vim-devicons'
+let NERDTreeMinimalUI=1
 
 
 if isdirectory('/usr/local/opt/fzf')
@@ -126,6 +123,9 @@ set shiftwidth=4
 set expandtab
 
 "" Map leader to ,
+set expandtab
+
+"" Map leader to ,
 let mapleader=','
 
 "" Enable hidden buffers
@@ -159,8 +159,10 @@ set ruler
 set number
 
 let no_buffers_menu=1
-colorscheme molokai
-
+colorscheme onehalfdark
+let g:airline_theme='onehalfdark'
+" lightline
+ let g:lightline = { 'colorscheme': 'onehalfdark' }
 
 set mousemodel=popup
 set t_Co=256
@@ -518,10 +520,15 @@ let g:airline_symbols.paste = '∥'
 let g:airline_symbols.whitespace = 'Ξ'
 
 " airline symbols
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
 let g:airline_right_alt_sep = ''
 let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
+
+
+nnoremap <C-p> :Files<Cr>
+nnoremap <C-x> :q!<Cr>
+nnoremap <C-s> :w <Cr>
+nnoremap <C-b> :Buffers <Cr>
+nnoremap <C-v> :bd<Cr>
+nnoremap <C-n> :NERDTreeToggle<Cr>
