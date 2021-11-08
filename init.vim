@@ -56,11 +56,77 @@ Plug 'sonph/onehalf', { 'rtp': 'vim' }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'dense-analysis/ale'
+Plug 'alvan/vim-closetag'
+Plug 'tpope/vim-surround'
+
+"Hola como estas"
+"Close tag config
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.jsx,*.js,*.tsx'
+let g:closetag_xhtml_filenames = '*.xml,*.xhtml,*.jsx,*.js,*.tsx'
+let g:closetag_filetypes = 'html,xhtml,jsx,js,tsx'
+let g:closetag_xhtml_filetypes = 'xml,xhtml,jsx,js,tsx'
+let g:closetag_emptyTags_caseSensitive = 1
+
+" dict
+" Disables auto-close if not in a "valid" region (based on filetype)
+"
+let g:closetag_regions = {
+    \ 'typescript.tsx': 'jsxRegion,tsxRegion',
+    \ 'javascript.jsx': 'jsxRegion',
+    \ 'typescriptreact': 'jsxRegion,tsxRegion',
+    \ 'javascriptreact': 'jsxRegion',
+    \ }
+
+" Shortcut for closing tags, default is '>'
+let g:closetag_shortcut = '>'
+let g:closetag_close_shortcut = '<leader>>'
+"End close tag
 
 " post install (yarn install | npm install) then load plugin only for editing supported files
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 let g:prettier#autoformat = 1
 let g:prettier#autoformat_require_pragma = 0
+"Prettier config
+"" Max line length that prettier will wrap on: a number or 'auto' (use
+" textwidth).
+" default: 'auto'
+let g:prettier#config#print_width = 'auto'
+
+" number of spaces per indentation level: a number or 'auto' (use
+" softtabstop)
+" default: 'auto'
+let g:prettier#config#tab_width = 'auto'
+
+" use tabs instead of spaces: true, false, or auto (use the expandtab setting).
+" default: 'auto'
+let g:prettier#config#use_tabs = 'auto'
+
+" flow|babylon|typescript|css|less|scss|json|graphql|markdown or empty string
+" (let prettier choose).
+" default: ''
+let g:prettier#config#parser = ''
+
+" cli-override|file-override|prefer-file
+" default: 'file-override'
+let g:prettier#config#config_precedence = 'file-override'
+
+" always|never|preserve
+" default: 'preserve'
+let g:prettier#config#prose_wrap = 'preserve'
+
+" css|strict|ignore
+" default: 'css'
+let g:prettier#config#html_whitespace_sensitivity = 'css'
+
+" false|true
+" default: 'false'
+let g:prettier#config#require_pragma = 'false'
+
+" Define the flavor of line endings
+" lf|crlf|cr|all
+" defaut: 'lf'
+let g:prettier#config#end_of_line = get(g:, 'prettier#config#end_of_line', 'lf')
+"Prettier end config
 
 Plug 'ryanoasis/vim-devicons'
 let NERDTreeMinimalUI=1
@@ -117,9 +183,9 @@ set ttyfast
 set backspace=indent,eol,start
 
 "" Tabs. May be overridden by autocmd rules
-set tabstop=4
+set tabstop=2
 set softtabstop=0
-set shiftwidth=4
+set shiftwidth=2
 set expandtab
 
 "" Map leader to ,
@@ -229,7 +295,7 @@ if exists("*fugitive#statusline")
 endif
 
 " vim-airline
-let g:airline_theme = 'powerlineish'
+"let g:airline_theme = 'powerlineish'
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -461,42 +527,42 @@ endif
 "*****************************************************************************
 "" Convenience variables
 "*****************************************************************************
-
+"
 " vim-airline
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
-
-if !exists('g:airline_powerline_fonts')
-  let g:airline#extensions#tabline#left_sep = ' '
-  let g:airline#extensions#tabline#left_alt_sep = '|'
-  let g:airline_left_sep          = '▶'
-  let g:airline_left_alt_sep      = '»'
-  let g:airline_right_sep         = '◀'
-  let g:airline_right_alt_sep     = '«'
-  let g:airline#extensions#branch#prefix     = '⤴' "➔, ➥, ⎇
-  let g:airline#extensions#readonly#symbol   = '⊘'
-  let g:airline#extensions#linecolumn#prefix = '¶'
-  let g:airline#extensions#paste#symbol      = 'ρ'
-  let g:airline_symbols.linenr    = '␊'
-  let g:airline_symbols.branch    = '⎇'
-  let g:airline_symbols.paste     = 'ρ'
-  let g:airline_symbols.paste     = 'Þ'
-  let g:airline_symbols.paste     = '∥'
-  let g:airline_symbols.whitespace = 'Ξ'
-else
-  let g:airline#extensions#tabline#left_sep = ''
-  let g:airline#extensions#tabline#left_alt_sep = ''
-
-  " powerline symbols
-  let g:airline_left_sep = ''
-  let g:airline_left_alt_sep = ''
-  let g:airline_right_sep = ''
-  let g:airline_right_alt_sep = ''
-  let g:airline_symbols.branch = ''
-  let g:airline_symbols.readonly = ''
-  let g:airline_symbols.linenr = ''
-endif
+"if !exists('g:airline_symbols')
+"  let g:airline_symbols = {}
+"endif
+""
+"if !exists('g:airline_powerline_fonts')
+"  let g:airline#extensions#tabline#left_sep = ' '
+"  let g:airline#extensions#tabline#left_alt_sep = '|'
+"  let g:airline_left_sep          = '▶'
+"  let g:airline_left_alt_sep      = '»'
+"  let g:airline_right_sep         = '◀'
+"  let g:airline_right_alt_sep     = '«'
+"  let g:airline#extensions#branch#prefix     = '⤴' "➔, ➥, ⎇
+"  let g:airline#extensions#readonly#symbol   = '⊘'
+"  let g:airline#extensions#linecolumn#prefix = '¶'
+"  let g:airline#extensions#paste#symbol      = 'ρ'
+"  let g:airline_symbols.linenr    = '␊'
+"  let g:airline_symbols.branch    = '⎇'
+"  let g:airline_symbols.paste     = 'ρ'
+"  let g:airline_symbols.paste     = 'Þ'
+"  let g:airline_symbols.paste     = '∥'
+"  let g:airline_symbols.whitespace = 'Ξ'
+"else
+"  let g:airline#extensions#tabline#left_sep = ''
+"  let g:airline#extensions#tabline#left_alt_sep = ''
+"
+"  " powerline symbols
+"  let g:airline_left_sep = ''
+"  let g:airline_left_alt_sep = ''
+"  let g:airline_right_sep = ''
+"  let g:airline_right_alt_sep = ''
+"  let g:airline_symbols.branch = ''
+"  let g:airline_symbols.readonly = ''
+"  let g:airline_symbols.linenr = ''
+"endif
 
 " air-line
 let g:airline_powerline_fonts = 1
@@ -520,6 +586,9 @@ let g:airline_symbols.paste = '∥'
 let g:airline_symbols.whitespace = 'Ξ'
 
 " airline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
 let g:airline_right_alt_sep = ''
 let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
@@ -529,6 +598,7 @@ let g:airline_symbols.linenr = ''
 nnoremap <C-p> :Files<Cr>
 nnoremap <C-x> :q!<Cr>
 nnoremap <C-s> :w <Cr>
-nnoremap <C-b> :Buffers <Cr>
+nnoremap <C-o> :Buffers <Cr>
 nnoremap <C-v> :bd<Cr>
 nnoremap <C-n> :NERDTreeToggle<Cr>
+nnoremap <C-m> :vsp<Cr>
